@@ -112,7 +112,7 @@ gulp.task('images', function() {
 		.pipe(plugins.imagemin())
 		.pipe(plugins.svgmin())
 		.on('error', handleError)
-		.pipe(gulp.dest('getDests().images'))
+		.pipe(gulp.dest(getDests().images))
 		.pipe(refresh(lrserver));
 });
 
