@@ -1,10 +1,12 @@
 .branding
-	clear: both
+	background: nth($brand, 3)
+	padding: .5rem 0
 
 .logo
 	+replace-text(image-url("real-feels_logo.svg"))
 	+background-size(contain)
 	display: block
+	height: 10rem
 	&:hover
 		background: inherit
 		+replace-text(image-url("real-feels_logo.svg"))
@@ -12,12 +14,12 @@
 
 .no-svg .logo
 	width: 100%
-	+replace-text(image-url("real-feels_logo.png"))
+	//+replace-text(image-url("real-feels_logo.png"))
 	+background-size(100%)
 
 .subtitle
 	display: block
 	padding: 0 msem(0)
-	@extend %copy
+	//@extend %copy
 	text-align: center
 	+trailer(.5)

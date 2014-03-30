@@ -1,12 +1,24 @@
 .search
 	width: 95%
 	margin: 0 auto
+	padding-bottom: .25rem
+
 
 .field--search
 	width: 70%
 	float: left
+	+border-left-radius(.2rem)
+	+border-right-radius(0)
 
 .search-btn
+	@extend .btn
 	width: 30%
-	+border-right-radius(msem(-10))
+	+border-right-radius(.2rem)
 	+border-left-radius(0)
+
+.menu-btn
+	@extend .btn
+	font-size: .75rem
+	margin-left: .3rem
+	margin-top: .3rem
+	position: absolute

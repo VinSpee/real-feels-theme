@@ -3,14 +3,10 @@
 	font-weight: 600
 	text-transform: uppercase
 	cursor: pointer
-	background: linear-gradient(tint(nth($shade, 4), 15%), nth($shade, 4))
+	background: nth($brand, 5)
 	color: nth($shade, 6)
-	border: 0
-	padding: 0
-	font-size: 1rem
-	line-height: 1.65
 	border-radius: .25rem
-	padding: .25rem 1rem
+	padding: .5rem 1rem
 	transition: all .2s linear
 	box-shadow: inset 0 0 0 2px transparentize(nth($shade, 4), 1)
 	&:hover
@@ -25,10 +21,6 @@
 		&:hover
 			box-shadow: inset 0 0 0 2px nth($brand, 3)
 			color: nth($brand, 3)
-
 	&--dark
 		@extend .btn
 		color: nth($shade, 1)
-
-.menu-btn
-	@extend .btn

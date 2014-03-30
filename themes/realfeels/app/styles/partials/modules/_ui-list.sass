@@ -1,0 +1,62 @@
+.ui-list
+	@extend .bare-list
+	overflow: hidden
+	@extend %font__headline
+	> li
+		> a, a:visited
+			display: block
+			text-decoration: none
+			padding: .5rem 1rem
+
+.tab-nav
+	@extend .tabs
+	overflow: visible
+
+.tab-nav--with-controls
+	@extend .tab-nav
+	width: 75% /* fallback for browsers without support for calc() */
+	width: -webkit-calc(100% - 154px)  /* WebKit 536.3 (Chrome 19) and above, experimental */
+	width: calc(100% - 154px)
+	min-width: 460px
+	float: left
+
+.tab-nav__item
+	@extend .tabs__item
+	overflow: visible
+	+border-top-radius(ms(-10))
+
+
+.tab-nav__action
+	@extend .tabs__action
+	text-decoration: none
+	color: nth($shade, 3)
+	overflow: hidden
+	+border-top-radius(ms(-10))
+	border-color: nth($shade, 5)
+	border-bottom: none
+	+box-shadow(inset 0 -1px 4px -1px nth($shade, 5))
+	+transition(all .2s linear)
+	&:hover
+		background: shade(nth($shade, 6), 3%)
+		text-decoration: none
+		color: nth($shade, 2)
+
+.tab-nav__action--active
+	@extend .tab-nav__action
+	background: shade(nth($shade, 6), 3%)
+	border-color: nth($shade, 5)
+	+box-shadow(0 1px 0 0 shade(nth($shade, 6), 3%))
+	+transition(all .2s linear)
+	border-bottom: 0
+
+.tab-component__content
+	background: shade(nth($shade, 6), 3%)
+	+rhythm(0, .5, .5, 0)
+	border-color: nth($shade, 5)
+	> *:first-child
+		margin: 0
+
+.tab-nav__controls
+	@extend .bare-list
+	float: right
+	min-width: 117px

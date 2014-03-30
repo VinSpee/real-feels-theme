@@ -19,13 +19,12 @@
 		<link rel="apple-touch-icon" href="{PortraitURL-128}">
 		<link rel="shortcut icon" href="{Favicon}">
 		<link rel="alternate" type="application/rss+xml" href="{RSS}">
-		<!--<script src="themes/real-feels/app/components/modernizr/modernizr.js"></script>-->
 	</head>
+
 	<body>
 		<div class="page">
 
 			<header role="banner">
-
 				<nav role="navigation">
 					<menu class="ui-list">
 						{block:HasPages}
@@ -48,7 +47,9 @@
 					<button class="menu-btn">menu</button>
 				</nav>
 
-				<a class="app-headline logo" href="/">{Title}</a>
+				<div class="branding">
+					<a class="app-headline logo" href="/">{Title}</a>
+				</div>
 				{block:Description}
 					<span class="subtitle">
 						{Description}
