@@ -1,0 +1,65 @@
+/*
+ * # Forms
+ *
+ * Forms encompass any inputs in any arrangement.
+ *
+ * ## Labels
+ *
+ * Labels describe what you're expecting a user to give you. They should always
+ * be followed by an input.
+ *
+ * ## Inputs
+ *
+ * Inputs are editable fields that users can put data into. They should always
+ * have a placeholder, label, and validation.
+ * ```
+ * <label class="data__label">Amount of money to donate</label>
+ * <input type="text" placeholder="100" class="data__value" />
+ * ```
+ */
+
+label
+	display: block
+	color: nth($brand, 4)
+	+trailer(.25)
+	&:after
+		content: ":"
+
+textarea, input[type=textarea]
+
+fieldset
+	border: none
+	margin: 0
+	padding: 0
+
+input[type=search]
+/*
+ * ## Text
+ * ```
+ * <label class="data__label">Text Input</label>
+ * <input class="data__value" type="text" placeholder="Enter some text"/>
+ * ```
+ */
+
+/*
+ * ## Number
+ * ```
+ * <label class="data__label">Number Input</label>
+ * <input class="data__value" type="number" placeholder="99"/>
+ * ```
+ */
+
+input[type=number]
+
+/*
+ * ## Radio
+ * ```
+ * <label class="data__label">Radio Input</label>
+ * <ul class="data__value--group">
+ * 	<li><label class="data__label">Choice 1</label><input class="data__value" type="radio" name="radio-demo" value="1" /></li>
+ * 	<li><label class="data__label">Choice 2</label><input class="data__value" type="radio" name="radio-demo" value="2" /></li>
+ * 	<li><label class="data__label">Choice 3</label><input class="data__value" type="radio" name="radio-demo" value="3" /></li>
+ * </ul>
+ * ```
+ */
+

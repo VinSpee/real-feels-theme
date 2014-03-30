@@ -1,0 +1,68 @@
+%font__headline
+	font-family: 'Omnes', 'omnes-pro', 'Sans serif'
+	font-weight: 200
+	font-style: italic
+
+%font__text
+	font-family: 'Gentium Book Basic', 'Sans serif'
+
+//+font-face('real-feels-icons', font-files('real-feels-icons.svg', 'real-feels-icons.woff', 'real-feels-icons.ttf'), 'real-feels-icons.eot', normal, normal)
+//@font-face
+	//font-family: "crank"
+	//src: url("../fonts/compete.eot")
+	//src: url("../fonts/compete.eot?#iefix") format("eot"), url("../fonts/compete.svg") format("svg"), url("../fonts/compete.woff") format("woff"), url("../fonts/compete.ttf") format("truetype")
+	//font-weight: normal
+	//font-style: normal
+
+
+%font__icon
+	font-family: 'real-feels-icons'
+	speak: none
+	font-style: normal
+	font-weight: normal
+	font-variant: normal
+	text-transform: none
+	-webkit-font-smoothing: antialiased
+	-moz-osx-font-smoothing: grayscale
+	-webkit-font-feature-settings: "liga"
+	-moz-font-feature-settings: "liga=1"
+	-moz-font-feature-settings: "liga"
+	-ms-font-feature-settings: "liga" 1
+	-o-font-feature-settings: "liga"
+	font-feature-settings: "liga"
+
+//%font__icon--big
+	//@extend %font__icon
+	//+adjust-font-size-to(32px)
+
+[data-icon]
+	&:before
+		@extend %font__icon
+		color: white
+		content: attr(data-icon)
+		+inline-block
+		//+hide-text
+
+
+%icon
+	@extend %font__icon
+	color: nth($shade, 6)
+	outline: none
+
+//.icon--negative
+	//@extend .icon
+	//color: nth($brand, 3)
+	//+transition(color .2s linear)
+	//&:hover
+		//color: nth($brand, 2)
+
+%prepend-icon
+	@extend %font__icon
+	margin-right: msem(-4)
+
+%prepend-icon__search
+	@extend %prepend-icon
+	content: 'search'
+
+//[class*="icon"][class*="--big"]
+	//@extend %font__icon--big

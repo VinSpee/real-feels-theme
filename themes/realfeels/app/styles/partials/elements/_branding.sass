@@ -1,0 +1,23 @@
+.branding
+	clear: both
+
+.logo
+	+replace-text(image-url("real-feels_logo.svg"))
+	+background-size(contain)
+	display: block
+	&:hover
+		background: inherit
+		+replace-text(image-url("real-feels_logo.svg"))
+		+background-size(contain)
+
+.no-svg .logo
+	width: 100%
+	+replace-text(image-url("real-feels_logo.png"))
+	+background-size(100%)
+
+.subtitle
+	display: block
+	padding: 0 msem(0)
+	@extend %copy
+	text-align: center
+	+trailer(.5)

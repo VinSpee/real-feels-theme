@@ -1,0 +1,117 @@
+/*
+ * # Lists
+ *
+ * standard, untreated list
+ *
+ * ```
+ * <ol class="list">
+ * 	<li>Item</li>
+ * 	<li>Item</li>
+ *</ol>
+ * ```
+ *
+ * ```
+ * <ul class="list">
+ * 	<li>Item</li>
+ * 	<li>Item</li>
+ *</ul>
+ * ```
+ */
+
+/*
+ * ## Bare List
+ *
+ * standard, untreated list
+ *
+ * ```
+ * <ul class="bare-list">
+ * 	<li>Item</li>
+ * 	<li>Item</li>
+ *</ul>
+ * ```
+ */
+
+.bare-list
+	margin: 0
+	padding: 0
+	list-style: none
+	> li
+		margin: 0
+		padding: 0
+
+
+/*
+ * ## Line List
+ *
+ * List items in a line
+ *
+ * ```
+ * <ul class="line-list">
+ * 	<li>Item</li>
+ * 	<li>Item</li>
+ *</ul>
+ * ```
+ */
+
+.line-list
+	@extend .bare-list
+	> li
+		letter-spacing: -0.31em
+		display: inline-block
+		> *
+			letter-spacing: normal
+
+/*
+ * ## Tabs
+ *
+ * Tabs are equal-width horizontal layouts.
+ *
+ * ```
+ * <ul class="tabs">
+ * 	<li class="tabs__item">
+ * 		<a href="#" class="tabs__action">Tab 1</a>
+ * 	</li>
+ * 	<li class="tabs__item">
+ * 		<a href="#" class="tabs__action">Tab 2</a>
+ * 	</li>
+ * 	<li class="tabs__item">
+ * 		<a href="#" class="tabs__action">Tab 3</a>
+ * 	</li>
+ * 	<li class="tabs__item">
+ * 		<a href="#" class="tabs__action">Tab 4</a>
+ * 	</li>
+ * </ul>
+ * ```
+ */
+
+.tabs
+	margin: 0
+	padding: 0
+	list-style: none
+	display: table
+	table-layout: fixed
+	width: 100%
+	overflow: hidden
+
+.tabs__item
+	text-align: center
+	display: table-cell
+
+.tabs__action
+	display: block
+
+.ui-list
+	@extend .bare-list
+	background: nth($brand, 4)
+	box-shadow: inset 0 0 5px nth($brand, 2), 0 1px 0 transparentize(nth($brand, 5), .7)
+	border-color: nth($brand, 2)
+	a
+		display: block
+		+padding-x(msem(0))
+		color: nth($shade, 6)
+		text-decoration: none
+		@extend %font__headline
+		text-transform: uppercase
+		&:hover
+			background: nth($brand, 5)
+
