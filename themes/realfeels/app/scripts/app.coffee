@@ -1,3 +1,3 @@
-Dude = require "./dude"
+Font = require("./font")
 
-do Dude.start
+do Font.load
