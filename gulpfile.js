@@ -1,34 +1,15 @@
 var gulp       = require('gulp');
 var env        = require('minimist')(process.argv.slice(2));
-var connect    = require('connect');
 var http       = require('http');
-var browse     = require('open');
 var coffeeify  = require('coffeeify');
 var plugins    = require('gulp-load-plugins')();
-var refresh    = require('gulp-livereload');
-var lrserver   = require('tiny-lr')();
-var path       = require('path');
-var express    = require('express');
-var livereload = require('connect-livereload');
+var browserSync = require('browser-sync');
 
 if(env.theme) {
 	var themeDir = env.theme;
 } else {
 	var themeDir = 'demo';
 }
-
-//config
-var livereloadport = 35729;
-var serverport     = 5000;
-var server         = express();
-
-//Add livereload middleware before static-middleware
-server.use(livereload({
-	port: livereloadport
-}));
-
-//Add static-middleware
-server.use(express.static(path.resolve('./')));
 
 var getSources = function() {
 	//read theme and pick dir
@@ -39,7 +20,8 @@ var getSources = function() {
 		main_scripts : 'themes/' + themeDir + '/app/scripts/app.coffee',
 		images       : 'themes/' + themeDir + '/app/images/**',
 		templates    : 'themes/' + themeDir + '/app/templates/**/*.hbs',
-		fonts        : 'themes/' + themeDir + '/app/fonts/*.*'
+		fonts        : 'themes/' + themeDir + '/app/fonts/*.*',
+		html         : 'themes/' + themeDir + '/app/*.html'
 	};
 	return sources;
 };
@@ -63,7 +45,7 @@ var handleError = function(err) {
 };
 
 gulp.task('scripts', function() {
-	return gulp.src(getSources().main_scripts, {read: false})
+	gulp.src(getSources().main_scripts, {read: false})
 		.pipe(plugins.coffeelint())
 		.pipe(plugins.coffeelint.reporter())
 		.pipe(plugins.browserify({
@@ -73,8 +55,7 @@ gulp.task('scripts', function() {
 		}))
 		.pipe(plugins.concat('app.js'))
 		.pipe(env.production ? plugins.uglify() : plugins.util.noop())
-		.pipe(gulp.dest(getDests().scripts))
-		.pipe(refresh(lrserver));
+		.pipe(gulp.dest(getDests().scripts));
 });
 
 gulp.task('styles', function() {
@@ -94,40 +75,38 @@ gulp.task('styles', function() {
 		//}))
 		.pipe(plugins.csslint.reporter())
 		.pipe(env.production ? plugins.csso() : plugins.util.noop())
-		.pipe(gulp.dest('build/styles'))
-		.pipe(refresh(lrserver));
+		.pipe(gulp.dest(getDests().styles));
 });
 
 gulp.task('html', function() {
-	return gulp.src(getSources().html)
-		.pipe(plugins.htmlhint())
-		.pipe(plugins.htmlhint.reporter())
+	gulp.src(getSources().html)
+		//.pipe(plugins.htmlhint())
+		//.pipe(plugins.htmlhint.reporter())
 		//.pipe(plugins.usemin)
-		.pipe(plugins.htmlmin({collapseWhitespace: true}))
-		.pipe(gulp.dest('build/'));
+		//.pipe(plugins.htmlmin({collapseWhitespace: true}))
+		.pipe(gulp.dest(getDests().html));
 });
 
 gulp.task('images', function() {
-	return gulp.src(getSources().images)
+	gulp.src(getSources().images)
 		.pipe(plugins.imagemin())
 		.pipe(plugins.svgmin())
 		.on('error', handleError)
-		.pipe(gulp.dest(getDests().images))
-		.pipe(refresh(lrserver));
+		.pipe(gulp.dest(getDests().images));
 });
 
 gulp.task('fonts', function() {
-	return gulp.src(getSources().fonts)
+	gulp.src(getSources().fonts)
 		.pipe(gulp.dest('getDests().fonts'));
 });
 
 // Rerun the task when a file changes
-gulp.task('watch', function () {
+gulp.task('watch', ['browser-sync'], function () {
 	gulp.watch(getSources().styles, ['styles']);
 	gulp.watch(getSources().scripts, ['scripts']);
 	gulp.watch(getSources().images, ['images']);
+	gulp.watch(getSources().html, ['html']);
 	//gulp.watch(sources.templates, ['templates']);
-	//gulp.watch(sources.html, ['html']);
 });
 
 gulp.task('clean', function() {
@@ -135,13 +114,18 @@ gulp.task('clean', function() {
 		.pipe(plugins.clean());
 });
 
-gulp.task('server', function() {
-	//Set up your static fileserver, which serves files in the build dir
-	server.listen(serverport);
-	//Set up your livereload server
-	lrserver.listen(livereloadport);
+gulp.task('browser-sync', function() {
+	browserSync.init([
+		getDests().styles + '*.css',
+		getDests().scripts + '*.js',
+		getDests().html + '*.html'
+	], {
+		server: {
+			baseDir: './'
+		}
+	});
 });
 
 // The default task (called when you run `gulp` from cli)
 gulp.task('build', ['styles', 'scripts']);
-gulp.task('default', ['build', 'server', 'watch']);
+gulp.task('default', ['build', 'watch']);
